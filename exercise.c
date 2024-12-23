@@ -7,7 +7,9 @@ int main(int ac, char **av)
 	ssize_t len = 0;
 	int i, status = 0;
 	pid_t hijo1;
-	
+
+	print2();
+
 	while (1)
 	{
 		printf("#Shellzilla$ ");
@@ -30,6 +32,11 @@ int main(int ac, char **av)
 		}
 		args[i] = NULL;
 
+		if (args[0] != NULL && strcmp(args[0], "exit") == 0)
+		{
+			break;
+		}
+
 		if (args[0] == NULL)
 		{
 			continue;
@@ -41,14 +48,14 @@ int main(int ac, char **av)
 			exit(-1);
 		}
 		if (hijo1 == 0)
-		{
+		{	
 			if (execve(args[0], args, NULL) == -1)
 			{
-				printf("Error: Command not fund\n");
+				printf("Shellzilla: No such file or directory\n");
 				exit(1);
 			}
 		}
-
+/
 		else if (hijo1 > 0)
 		{
 			wait(&status);
