@@ -43,10 +43,6 @@ int main(int ac, char **av)
 		}
 
 		hijo1 = fork();
-		if (hijo1 == -1)
-		{
-			exit(-1);
-		}
 		if (hijo1 == 0)
 		{	
 			if (execve(args[0], args, NULL) == -1)
@@ -55,7 +51,7 @@ int main(int ac, char **av)
 				exit(1);
 			}
 		}
-/
+
 		else if (hijo1 > 0)
 		{
 			wait(&status);
