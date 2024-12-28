@@ -2,29 +2,38 @@
 
 char *_getenv(const char *name)
 {
-        extern char **environ;
-        int i = 0;
-        char *token;
+	extern char **environ;
+	int i;
+	char *token;
 
-        while (environ[i])
-        {
-                token = strtok(environ[i], "=");
+	while (environ[i])
+	{
+		token = strtok(environ[i], "=");
 
-                if (strcmp(token, name) == 0)
-                {
-                        return (strtok(NULL, "="));
-                }
-                i++;
-        }
-        return (NULL);
+		if (strcmp(token, "PATH") == 0)
+		{
+			return (strtok(NULL, "="));
+		}
+		i++;
+	}
+	return NULL;
 }
 
-char *check_command (char *command, char *path)
+char *check_command(char *command, char *path)
 {
-	char *copy_path = strdup(path);
-	char *token;
 	char *full_path = malloc(sizeof(char *) * 1024);
+	char *copy_path = strdup(path);
 	struct stat st;
+	char *token;
+
+	if (command[0] == '/')
+	{
+		if (access(command, X_OK) == 0)
+		{
+			return (strdup(command));
+		}
+		return (NULL);
+	}
 
 	token = strtok(copy_path, ":");
 
@@ -42,4 +51,23 @@ char *check_command (char *command, char *path)
 	free(copy_path);
 	free(full_path);
 	return (NULL);
+}
+
+char **tokenizar(char *linea, char *delim)
+{
+	char **args = malloc(sizeof(char *) * 1024);
+	char *token;
+	int i = 0;
+
+	token = strtok(linea, delim);
+
+	while (token != NULL)
+	{
+		args[i] = token;
+		token = strtok(NULL, delim);
+		i++;
+	}
+	args[i] = NULL;
+
+	return (args);
 }

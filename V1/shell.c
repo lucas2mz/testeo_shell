@@ -2,42 +2,52 @@
 
 int main(int ac, char **av)
 {
-	char *linea, *path = _getenv("PATH"), *full_path;
+	char *linea, *token, *full_path, *path = _getenv("PATH");
 	size_t size = 0;
 	ssize_t len = 0;
 	char **args = malloc(sizeof(char *) * 1024);
-	int i, status;
 	pid_t hijo;
+	int i, status;
 
 	while (1)
 	{
 		printf("Shellzilla$ ");
 		len = getline(&linea, &size, stdin);
+
 		if (len == -1)
 		{
 			break;
 		}
-		args = tokenizar(linea, " \n\t");
-		if (args == NULL || args[0] == NULL)
+
+		token = strtok(linea, " \n\t");
+
+		i = 0;
+
+		while (token != NULL)
 		{
-			free(args);
-			continue;
+			args[i] = token;
+			token = strtok(NULL, " \n\t");
+			i++;
 		}
+		args[i] = NULL;
+
 		full_path = check_command(args[0], path);
+
 		if (full_path == NULL)
 		{
 			printf("Shellzilla: No such file or directory\n");
-			free(args);
 			continue;
 		}
+
 		hijo = fork();
+
 		if (hijo == 0)
 		{
-			if (execve(full_path, args, NULL) == -1)
+			if (execve(full_path, args, environ) == -1)
 			{
-				printf("Shellzilla: No such file or directory\n");
+				perror("Execve");
 				free(full_path);
-				return(1);
+				return (1);
 			}
 		}
 		else
@@ -45,8 +55,8 @@ int main(int ac, char **av)
 			wait(&status);
 		}
 		free(full_path);
-		free(args);
 	}
 	free(linea);
+	free(args);
 	return (0);
 }

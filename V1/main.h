@@ -13,6 +13,5 @@ extern char **environ;
 void print(void);
 void print2(void);
 char *_getenv(const char *name);
-char *check_command(char *command, char *path);
-char **tokenizar(char *linea, char *delim);
+char *check_command (char *command, char *path);
 #endif
