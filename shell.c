@@ -5,10 +5,11 @@ int main(int ac, char **av)
 	char *linea, *path = _getenv("PATH"), *full_path;
 	size_t size = 0;
 	ssize_t len = 0;
-	char **args;
+	char **args = malloc(sizeof(char *) * 1024);
 	int i, status;
 	pid_t hijo;
-
+	
+	print2();
 	while (1)
 	{
 		printf("Shellzilla$ ");
