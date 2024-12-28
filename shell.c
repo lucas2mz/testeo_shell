@@ -35,8 +35,10 @@ int main(int ac, char **av)
 		{
 			if (execve(full_path, args, NULL) == -1)
 			{
-				printf("Shellzilla: No such file or directory\n");
+				perror("Execve");
 				free(full_path);
+				free(args);
+				free(linea);
 				return(1);
 			}
 		}
