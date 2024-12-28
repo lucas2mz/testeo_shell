@@ -5,7 +5,7 @@ int main(int ac, char **av)
 	char *linea, *path = _getenv("PATH"), *full_path;
 	size_t size = 0;
 	ssize_t len = 0;
-	char **args = malloc(sizeof(char *) * 1024);
+	char **args;
 	int i, status;
 	pid_t hijo;
 
