@@ -18,6 +18,10 @@ int main(int ac, char **av)
 		{
 			break;
 		}
+		if (strcmp(linea, "exit\n") == 0)
+		{
+			break;
+		}
 		args = tokenizar(linea, " \n\t");
 		if (args == NULL || args[0] == NULL)
 		{
