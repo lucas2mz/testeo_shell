@@ -1,5 +1,9 @@
 #include "main.h"
-
+/*
+ * main - Entry of the program
+ *
+ * Return: Always 0
+ */
 int main(void)
 {
 	char *linea = NULL, *path = _getenv("PATH"), *full_path = NULL;
@@ -9,10 +13,7 @@ int main(void)
 	{
 		if (isatty(STDIN_FILENO))
 			printf("Shellzilla$ ");
-
-		if (_getenv("TERM") == NULL)
-    			setenv("TERM", "xterm", 1);
-
+	
 		if (leer_linea(&linea) == 0)
 			break;
 
