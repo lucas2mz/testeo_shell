@@ -1,5 +1,5 @@
 #include "main.h"
-/*
+/**
  * _getenv - Gets the environment
  * @name: The directory to check
  *
@@ -7,7 +7,6 @@
  */
 char *_getenv(const char *name)
 {
-	extern char **environ;
 	int i = 0;
 	char *token;
 
@@ -21,10 +20,10 @@ char *_getenv(const char *name)
 		}
 		i++;
 	}
-	return NULL;
+	return (NULL);
 }
-/*
- * chech_command - Checks if the command exist
+/**
+ * check_command - Checks if the command exist
  * @command: Command to be checked
  * @path: The path to go over
  *
@@ -41,7 +40,7 @@ char *check_command(char *command, char *path)
 	{
 		free(full_path);
 		free(copy_path);
-		return NULL;
+		return (NULL);
 	}
 
 	if (command[0] == '/')
@@ -56,13 +55,11 @@ char *check_command(char *command, char *path)
 		free(full_path);
 		return (NULL);
 	}
-
 	token = strtok(copy_path, ":");
 
 	while (token != NULL)
 	{
 		sprintf(full_path, "%s/%s", token, command);
-
 		if (stat(full_path, &st) == 0)
 		{
 			free(copy_path);
@@ -74,7 +71,7 @@ char *check_command(char *command, char *path)
 	free(full_path);
 	return (NULL);
 }
-/*
+/**
  * tokenizar - Crates tokens
  *
  * @linea: Line to token
@@ -100,9 +97,9 @@ char **tokenizar(char *linea, char *delim)
 
 	return (args);
 }
-/*
+/**
  * limpiar - Free dynamic memory
- * 
+ *
  * @linea: Line to free
  * @args: Args to be freed
  * @full_path: Path to free
@@ -118,7 +115,7 @@ void limpiar(char *linea, char **args, char *full_path)
 	if (full_path)
 		free(full_path);
 }
-/*
+/**
  * leer_linea - Read the output of the user
  * @linea: Line to read
  *
