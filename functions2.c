@@ -29,12 +29,10 @@ int ejecutar_comando(char *full_path, char **args)
 }
 /**
  * main_function - Does all the calls for the program
- * @path: The enviroment of path
  */
-void main_function(char *path)
+void main_function(void)
 {
-	char *linea = NULL;
-	char *full_path = NULL;
+	char *linea = NULL, *path = _getenv("PATH"), *full_path = NULL;
 	char **args;
 
 	while (1)

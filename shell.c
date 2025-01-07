@@ -6,8 +6,6 @@
  */
 int main(void)
 {
-	char *path = _getenv("PATH");
-
-	main_function(path);
+	main_function();
 	return (0);
 }
