@@ -18,5 +18,5 @@ char **tokenizar(char *linea, char *delim);
 void limpiar(char *linea, char **args, char *full_path);
 int leer_linea(char **linea);
 int ejecutar_comando(char *full_path, char **args);
-void main_function(char *linea);
+void main_function(char *path);
 #endif
