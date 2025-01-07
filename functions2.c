@@ -27,6 +27,10 @@ int ejecutar_comando(char *full_path, char **args)
 	}
 	return (0);
 }
+/**
+ * main_function - Does all the calls for the program
+ * @path: The enviroment of path
+ */
 void main_function(char *path)
 {
 	char *linea = NULL;
